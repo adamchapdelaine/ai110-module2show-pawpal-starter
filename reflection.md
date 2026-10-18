@@ -7,6 +7,44 @@
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
 
+My initial UML design, prior to any interaction with AI, is shown below:
+
+Owner:
+
+    Attributes:
+
+        owner name
+        owner information
+
+Pet:
+
+    Attributes:
+        pet name
+        pet information 
+
+Tasks:
+
+    Attributes:
+        task name
+        task category
+        duration
+        priority
+
+    Methods:
+        add task
+        edit task
+        remove task
+
+Scheduler:
+
+    Attributes:
+        scheduled tasks
+
+    Methods:
+        schedule a task (a walk, feeding, meds, etc)
+        see today's tasks
+
+
 **b. Design changes**
 
 - Did your design change during implementation?
