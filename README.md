@@ -46,12 +46,12 @@ pip install -r requirements.txt
 
 Paste a sample of your app's CLI or Streamlit output here so a reader can see what a generated plan looks like:
 
-```
-# e.g.:
-# Daily plan for Biscuit (Golden Retriever):
-#   08:00 — Morning walk (30 min) [priority: high]
-#   09:00 — Feeding (10 min) [priority: high]
-#   ...
+
+```Today's Schedule
+----------------------------------------
+07:30-07:35 Bentley: Give insulin shot (priority 3)
+07:35-07:45 Brody: Feed (priority 2)
+07:45-08:00 Bentley: Walk (priority 1)
 ```
 
 ## 🧪 Testing PawPal+
@@ -81,14 +81,23 @@ Sample test output:
 | Conflict handling | | e.g., overlapping time slots |
 | Recurring tasks | | e.g., daily vs. weekly |
 
+## Implementation Summary
+So far, I've built a small scheduling system with five classes (Owner, Pet, Task, Scheduler, ScheduledItem).
+
+Task represents a care activity the owner does for the pet. It holds a name, category, duration, priority, due time, frequency, and a completion flag.
+Pet has a name, sex and species, and owns a list of Tasks as well as methods to add or remove them.
+Owner has a name, preferences, available time, and owns a list of Pets.
+Scheduler holds an Owner and produces the schedule.
+ScheduledItem is an extra class I made to hold a record of the output of Scheduler, with a time slot string, the task, and the pet's name the task is assigned to.
+
 ## 📸 Demo Walkthrough
 
 Describe your app in numbered steps so a reader can follow along without watching a video:
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
+1. Scheduler.get_todays_tasks() pulls all tasks through the owner and keeps the incomplete ones. It sorts them by due time, then by highest priority.
+2. Scheduler.schedule_task() re-sorts those tasks by priority first, then due time. It starts the clock at the earliest due time, or 8:00 if there are no tasks.
+3. It places tasks back to back and skips any task that no longer fits in the owner's remaining available minutes.
+4. Each placed task becomes a ScheduledItem, with the pet name looked up from which pet owns the task.
 5. <!-- Add more steps as needed -->
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or link to a demo video here -->

@@ -2,34 +2,54 @@ classDiagram
     %% Replace the placeholders below with your actual classes, attributes, methods, and relationships.
     %% Keep this file updated so it matches your final implementation.
 
-classDiagram
     class Owner {
         +String name
         +String info
+        +String preferences
+        +int time_available_minutes
+        +List~Pet~ pets
+        +add_pet(pet)
+        +remove_pet(pet)
+        +get_all_tasks() List~Task~
     }
 
     class Pet {
         +String name
-        +String info
+        +String sex
+        +String species
+        +List~Task~ tasks
+        +add_task(task)
+        +remove_task(task)
     }
 
     class Task {
         +String name
         +String category
-        +int duration
-        +String priority
-        +addTask()
-        +editTask()
-        +removeTask()
+        +int duration_minutes
+        +int priority
+        +time due_time
+        +bool is_complete
+        +String frequency
+        +String description
+        +mark_complete()
+    }
+
+    class ScheduledItem {
+        +String time_slot
+        +Task task
+        +String pet_name
     }
 
     class Scheduler {
-        +List~Task~ scheduledTasks
-        +scheduleTask()
-        +getTodaysTasks()
+        +Owner owner
+        +List~ScheduledItem~ scheduled_items
+        +get_all_tasks() List~Task~
+        +get_todays_tasks() List~Task~
+        +schedule_task() List~ScheduledItem~
     }
 
-    Owner "1" --> "1..*" Pet : owns
+    Owner "1" --> "0..*" Pet : owns
     Pet "1" --> "0..*" Task : needs
-    Scheduler "1" o-- "0..*" Task : schedules
-    Scheduler ..> Owner : uses
+    Scheduler "1" --> "1" Owner : uses
+    Scheduler "1" o-- "0..*" ScheduledItem : produces
+    ScheduledItem "1" --> "1" Task : wraps
