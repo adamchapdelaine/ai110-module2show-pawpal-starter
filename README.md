@@ -72,15 +72,13 @@ Sample test output:
 
 ## 📐 Smarter Scheduling
 
-> Fill in once you've implemented scheduling logic.
-
-| Feature | Method(s) | Notes |
-|---------|-----------|-------|
-| Task sorting | | e.g., by priority, duration |
-| Filtering | | e.g., skip tasks if time runs out |
-| Conflict handling | | e.g., overlapping time slots |
-| Recurring tasks | | e.g., daily vs. weekly |
-
+| Feature | Method(s)                                                                            | Notes                   |
+|---------|--------------------------------------------------------------------------------------|-------------------------|
+| Task sorting | `Scheduler.sort_by_time`, `Scheduler.get_todays_tasks`, `Scheduler.schedule_task` | `sort_by_time` sorts tasks by due_time, earliest first. `get_todays_tasks` sorts by time, then highest priority. `schedule_task` sorts by priority, then time. |
+| Filtering | `Scheduler.filter_tasks`, `Scheduler.get_todays_tasks`, `Scheduler.schedule_task` | `filter_tasks` filters by completion status and/or pet name (is case-insensitive). `get_todays_tasks` filters everything except incomplete tasks due today or overdue. `schedule_task` skips any task that doesn't fit in the owner's remaining time. |
+| Conflict handling | `Scheduler.find_conflicts`, `Task.start`, `Task.end` | Together they detect pending tasks with overlapping time ranges, whether for the same pet or different pets, and returns warning messages. |
+| Recurring tasks | `Task.next_occurrence`, `Task.mark_complete`, `Scheduler.mark_task_complete` | Completing a `daily` or `weekly` task creates a new copy due either 1 day or 7 days from today and adds it to the same pet. `once` tasks are not recurring and won't get a new copy. |
+W
 ## Implementation Summary
 So far, I've built a small scheduling system with five classes (Owner, Pet, Task, Scheduler, ScheduledItem).
 
