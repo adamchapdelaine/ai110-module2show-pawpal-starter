@@ -73,7 +73,11 @@ Scheduler:
 **b. Tradeoffs**
 
 - Describe one tradeoff your scheduler makes.
+
+    In my Scheduler class, the schedule_task function ignores each task's due_time and packs tasks back to back by priority. This prevents overlaps, but tasks may not run at the exact time the user requested.
+
 - Why is that tradeoff reasonable for this scenario?
+    The tradeoff is reasonable for this scenario because it ensures a usable, conflict-free plan with minimal code where the schedule is generated based on priority. It doesn't account for some activities that are very time-sensitive though, like medical ones, so in a different scenario it might be better to have tasks marked as fixed-time and others marked as flexible.
 
 ---
 

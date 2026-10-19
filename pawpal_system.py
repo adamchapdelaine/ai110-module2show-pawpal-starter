@@ -174,11 +174,11 @@ class Scheduler:
             for b, pet_b in entries[i+1:]:
                 if b.start >= a.end:
                     break # sorted by start, so nothing later can overlap `a`
-            kind = "same pet" if pet_a == pet_b else "different pets"
-            warnings.append(
-                f"Warning ({kind}): {pet_a}'s '{a.name}' at {a.due_time:%H:%M} "
-                f"overlaps {pet_b}'s '{b.name}' at {b.due_time:%H:%M}"
-            )
+                kind = "same pet" if pet_a == pet_b else "different pets"
+                warnings.append(
+                    f"Warning ({kind}): {pet_a}'s '{a.name}' at {a.due_time:%H:%M} "
+                    f"overlaps {pet_b}'s '{b.name}' at {b.due_time:%H:%M}"
+                )
         return warnings
 
     def schedule_task(self) -> List[ScheduledItem]:
